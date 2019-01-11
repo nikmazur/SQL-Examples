@@ -1,3 +1,4 @@
+//Class for holding customer data
 public class Customer {
     private String cust_code;
     private String agent_code;
@@ -9,6 +10,8 @@ public class Customer {
         this.cust_name = cust_name;
     }
 
+    // https://www.mkyong.com/java/java-how-to-overrides-equals-and-hashcode/
+    // Overriding equals method to allow comparing of Customer object.
     @Override
     public boolean equals(Object o) {
 
@@ -19,6 +22,7 @@ public class Customer {
 
         Customer cust = (Customer) o;
 
+        //Returns true if all 3 strings in both objects are equal, false otherwise
         return cust.cust_code.equals(cust_code) &&
                 cust.agent_code.equals(agent_code) &&
                 cust.cust_name.equals(cust_name);
