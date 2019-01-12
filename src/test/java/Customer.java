@@ -11,7 +11,7 @@ public class Customer {
     }
 
     // https://www.mkyong.com/java/java-how-to-overrides-equals-and-hashcode/
-    // Overriding equals method to allow comparing of Customer object.
+    // Overriding the equals method to allow comparison between Customer objects
     @Override
     public boolean equals(Object o) {
 

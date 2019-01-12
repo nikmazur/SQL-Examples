@@ -33,7 +33,7 @@ public class SQLTests extends Methods {
         //Export result to a string
         final String RES = rs.getString(1);
 
-        //Assert the result matches 34
+        //Verify the result matches 34
         assertEquals(RES, "34");
     }
 
@@ -74,8 +74,8 @@ public class SQLTests extends Methods {
         rs = stmt.executeQuery("SELECT COUNT(*) FROM CUSTOMER");
         final int ROWS = rs.getInt(1);
 
-        //Delete a row where Customer Name is NULL and get new counter.
-        //We left it NULL in testInsert, so this will delete only 1 row.
+        //Delete a row where Customer Name is NULL and get new counter
+        //We left it NULL in testInsert, so this will delete only 1 row
         stmt.execute("DELETE FROM CUSTOMER WHERE CUST_NAME IS NULL");
         rs = stmt.executeQuery("SELECT COUNT(*) FROM CUSTOMER");
 
@@ -86,7 +86,7 @@ public class SQLTests extends Methods {
     //Update a random row with random data
     @Test
     public void testRandUpdate() throws SQLException {
-        //Select 1 random Order from ORDERS
+        //Select 1 random Order Number from ORDERS
         rs = stmt.executeQuery("SELECT ORD_NUM FROM ORDERS ORDER BY RANDOM() LIMIT 1");
         final String ORDNUM = rs.getString(1);
 
@@ -94,7 +94,7 @@ public class SQLTests extends Methods {
         final String NDESC = RandomStringUtils.randomAlphanumeric(8);
         final int NAMOUNT = RandomUtils.nextInt(1, 10000);
 
-        //Update the Amount and Description fields for the random Order
+        //Update the Amount and Description fields
         stmt.execute("UPDATE ORDERS SET ORD_AMOUNT = " + NAMOUNT + ", ORD_DESCRIPTION = '" +
                 NDESC + "' WHERE ORD_NUM = " + ORDNUM);
 
@@ -114,7 +114,7 @@ public class SQLTests extends Methods {
         ArrayList<Customer> excelData = new ArrayList<>();
         ArrayList<Customer> sqlData = new ArrayList<>();
 
-        //Objects for reading data from the Excel file in bin project folder
+        //Objects for reading data from the Excel file in 'bin' project folder
         InputStream is = new FileInputStream("bin\\customers.xlsx");
         ReadableWorkbook wbr = new ReadableWorkbook(is);
         Sheet sheet = wbr.getFirstSheet();
@@ -132,7 +132,7 @@ public class SQLTests extends Methods {
                 });
             }
 
-        //Select the data from the AGENTS table
+        //Select the same data from the AGENTS table
         rs = stmt.executeQuery("SELECT CS.CUST_CODE, AG.AGENT_CODE, CS.CUST_NAME\n" +
                 "FROM AGENTS AS AG JOIN CUSTOMER CS ON AG.AGENT_CODE = CS.AGENT_CODE\n" +
                 "ORDER BY AG.AGENT_CODE");
@@ -147,8 +147,8 @@ public class SQLTests extends Methods {
             sqlData.add(cust);
         }
 
-        //Compare the resulting two arrays.
-        //For this to work the equals method in Customer needs to be overridden (see Customer class).
+        //Compare the resulting two arrays
+        //For this to work the equals method in Customer needs to be overridden (see Customer class)
         assertEquals(sqlData, excelData);
     }
 

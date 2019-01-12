@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class Methods {
 
-    //Objects for working SQL
+    //Objects for working with the database
     protected static Connection conn = null;
     protected static Statement stmt = null;
     protected ResultSet rs;
@@ -43,7 +43,7 @@ public class Methods {
         data[2][0] = "A005";
         data[2][1] = "Anderson";
 
-        //We've written 3 rows, so the test using using this DataProvider will run 3 times
+        //We've written 3 rows, so the test using this DataProvider will run 3 times
         return data;
     }
 }
