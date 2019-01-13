@@ -6,12 +6,12 @@ import java.sql.*;
 
 public class Methods {
 
-    //Objects for working with the database
+    //Objects for working with the SQL database
     protected static Connection conn = null;
     protected static Statement stmt = null;
     protected ResultSet rs;
 
-    //This method runs before any test classes. Opens the SQL connection before any tests are ran.
+    //This method runs before any test classes. Opens the SQL connection.
     @BeforeSuite
     public void setup() throws SQLException {
         //Establish connection to the local SQLite database (file is located in 'bin' project folder)

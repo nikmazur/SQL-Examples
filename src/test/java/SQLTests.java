@@ -30,15 +30,15 @@ public class SQLTests extends Methods {
         //Execute SQL query, store result in ResultSet
         rs = stmt.executeQuery("SELECT COUNT(*) FROM ORDERS");
 
-        //Export result to a string
-        final String RES = rs.getString(1);
+        //Export result
+        final int RES = rs.getInt(1);
 
         //Verify the result matches 34
-        assertEquals(RES, "34");
+        assertEquals(RES, 34);
     }
 
-    //Validate data in AGENTS table by comparing codes & names
-    //This test uses a dataProvider (listed in Methods), so it will run 3 times with different values
+    //Validate data in AGENTS table by comparing codes & names.
+    //This test uses a dataProvider (listed in Methods), so it will run 3 times with different values.
     @Test (dataProvider = "getAgents")
     public void testSelect(final String CODE, final String NAME) throws SQLException {
         //Select agent name based on code
@@ -74,8 +74,8 @@ public class SQLTests extends Methods {
         rs = stmt.executeQuery("SELECT COUNT(*) FROM CUSTOMER");
         final int ROWS = rs.getInt(1);
 
-        //Delete a row where Customer Name is NULL and get new counter
-        //We left it NULL in testInsert, so this will delete only 1 row
+        //Delete a row where Customer Name is NULL and get new counter.
+        //We left it NULL in testInsert, so this will delete only 1 row.
         stmt.execute("DELETE FROM CUSTOMER WHERE CUST_NAME IS NULL");
         rs = stmt.executeQuery("SELECT COUNT(*) FROM CUSTOMER");
 
@@ -120,7 +120,7 @@ public class SQLTests extends Methods {
         Sheet sheet = wbr.getFirstSheet();
 
         // https://github.com/dhatim/fastexcel
-        // Read data from the Excel sheet
+        // Read data from the Excel sheet using lambda
         try (Stream<Row> rows = sheet.openStream()) {
                 rows.forEach(r -> {
                     //Create a Customer object by passing data from Excel to the class constructor
@@ -147,12 +147,12 @@ public class SQLTests extends Methods {
             sqlData.add(cust);
         }
 
-        //Compare the resulting two arrays
-        //For this to work the equals method in Customer needs to be overridden (see Customer class)
+        //Compare the resulting two arrays.
+        //For this to work the equals method in Customer needs to be overridden (see Customer class).
         assertEquals(sqlData, excelData);
     }
 
-    //Negative tests start here.
+    //Negative tests.
     //Select from a non-existing table. Expecting to catch an SQL exception.
     @Test (expectedExceptions = SQLException.class)
     public void testNegNoTable() throws SQLException {
